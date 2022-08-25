@@ -1,7 +1,7 @@
 /*
  * Decompiled with CFR 0.150.
  */
-package su.nexus.commonlib.command;
+package su.nexus.lib.command;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,4 +1,4 @@
-package su.nexus.commonlib.message;
+package su.nexus.lib.message;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashBasedTable;
@@ -12,8 +12,8 @@ import com.google.gson.stream.JsonReader;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import su.nexus.commonlib.CommonLibPlugin;
-import su.nexus.commonlib.util.GsonUtil;
+import su.nexus.lib.NexusLibPlugin;
+import su.nexus.lib.util.GsonUtil;
 
 import java.io.File;
 import java.io.StringReader;
@@ -30,12 +30,12 @@ public class MessageRegistry {
 
 	public static void registerDefaults() {
 		MessageRegistry.unregisterAll();
-		MessageRegistry.registerTagAdapter(CommonLibPlugin.getInstance(), JsonElement.class, e -> e);
-		MessageRegistry.registerTagAdapter(CommonLibPlugin.getInstance(), Number.class, ((Gson) GsonUtil.GSON)::toJsonTree);
-		MessageRegistry.registerTagAdapter(CommonLibPlugin.getInstance(), String.class, ((Gson) GsonUtil.GSON)::toJsonTree);
-		MessageRegistry.registerTagAdapter(CommonLibPlugin.getInstance(), Message.class, Message::getCompleteValue);
-		MessageRegistry.registerTagAdapter(CommonLibPlugin.getInstance(), MessageKey.class, e -> e.message().getCompleteValue());
-		MessageRegistry.registerPrimitiveTagAdapter(CommonLibPlugin.getInstance(), Player.class, OfflinePlayer::getName);
+		MessageRegistry.registerTagAdapter(NexusLibPlugin.getInstance(), JsonElement.class, e -> e);
+		MessageRegistry.registerTagAdapter(NexusLibPlugin.getInstance(), Number.class, ((Gson) GsonUtil.GSON)::toJsonTree);
+		MessageRegistry.registerTagAdapter(NexusLibPlugin.getInstance(), String.class, ((Gson) GsonUtil.GSON)::toJsonTree);
+		MessageRegistry.registerTagAdapter(NexusLibPlugin.getInstance(), Message.class, Message::getCompleteValue);
+		MessageRegistry.registerTagAdapter(NexusLibPlugin.getInstance(), MessageKey.class, e -> e.message().getCompleteValue());
+		MessageRegistry.registerPrimitiveTagAdapter(NexusLibPlugin.getInstance(), Player.class, OfflinePlayer::getName);
 	}
 
 	public static void addMessages(String name, Messages map) {
@@ -124,7 +124,7 @@ public class MessageRegistry {
 		try {
 			jsonObject = MessageRegistry.loadFromFile(file);
 		} catch (JsonParseException e) {
-			CommonLibPlugin.getInstance().getLogger().log(Level.SEVERE, "Cannot parse messages file " + file.getAbsolutePath(), e);
+			NexusLibPlugin.getInstance().getLogger().log(Level.SEVERE, "Cannot parse messages file " + file.getAbsolutePath(), e);
 			return new Messages(new JsonObject());
 		}
 		boolean hasMissedKeys = keys.stream().filter(Objects::nonNull).anyMatch(k -> !jsonObject.has(k.getKey()));
@@ -140,7 +140,7 @@ public class MessageRegistry {
 		try {
 			return new Messages(MessageRegistry.loadFromFile(file));
 		} catch (JsonParseException e) {
-			CommonLibPlugin.getInstance().getLogger().log(Level.SEVERE, "Cannot parse messages file " + file.getAbsolutePath(), e);
+			NexusLibPlugin.getInstance().getLogger().log(Level.SEVERE, "Cannot parse messages file " + file.getAbsolutePath(), e);
 			return new Messages(new JsonObject());
 		}
 	}

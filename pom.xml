@@ -7,10 +7,10 @@
 	<groupId>su.nexus</groupId>
 	
 	<!-- Change to your plugin name, must be lower cased and match your end package name. No spaces. -->
-	<artifactId>CommonLib</artifactId>
+	<artifactId>lib</artifactId>
 	
 	<!-- Change to your plugin's name. Can contain capital letters, but do NOT use spaces. -->
-	<name>CommonLibs</name>
+	<name>NexusLib</name>
 	
 	<!-- Change to the appropriate plugin's version, starting at 1.0.0. -->
 	<version>1.0.0</version>
@@ -24,7 +24,7 @@
 		<author>AnleaR</author>
 		
 		<!-- Change to the full path where your main plugin class is located. -->
-		<main.class>su.nexus.commonlib.CommonLibPlugin</main.class>
+		<main.class>su.nexus.lib.NexusLibPlugin</main.class>
 		
 		<!-- Change the Java version this plugin is built on.
 

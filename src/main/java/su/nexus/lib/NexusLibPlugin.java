@@ -1,4 +1,4 @@
-package su.nexus.commonlib;
+package su.nexus.lib;
 
 import org.mineacademy.fo.Valid;
 import org.mineacademy.fo.model.HookManager;
@@ -11,7 +11,7 @@ import org.mineacademy.fo.plugin.SimplePlugin;
  *
  * It uses Foundation for fast and efficient development process.
  */
-public final class CommonLibPlugin extends SimplePlugin {
+public final class NexusLibPlugin extends SimplePlugin {
 
 	/**
 	* Automatically perform login ONCE when the plugin starts.
@@ -51,7 +51,7 @@ public final class CommonLibPlugin extends SimplePlugin {
 	 *
 	 * @return
 	 */
-	public static CommonLibPlugin getInstance() {
-		return (CommonLibPlugin) SimplePlugin.getInstance();
+	public static NexusLibPlugin getInstance() {
+		return (NexusLibPlugin) SimplePlugin.getInstance();
 	}
 }

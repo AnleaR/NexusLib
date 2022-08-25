@@ -50,13 +50,13 @@ Location_Format: "{world} [{x}, {y}, {z}]"
 #
 # * THE FIRST ALIAS IS THE MAIN LABEL, PLEASE DO NOT REMOVE IT. *
 # -------------------------------------------------------------------------------------------------
-Command_Aliases: [plugintemplate, template, plt]
+Command_Aliases: [nexuslib]
 
 # -------------------------------------------------------------------------------------------------
 # What language should we use for messages? If it exists, the language file will be copied 
 # to your messages/ folder where you can edit it.
 # -------------------------------------------------------------------------------------------------
-Locale: en
+Locale: ru
 
 # -------------------------------------------------------------------------------------------------
 # The prefix used in front of most chat or console messages. You can manually use it with

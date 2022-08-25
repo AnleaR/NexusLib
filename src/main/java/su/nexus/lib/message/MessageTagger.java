@@ -1,4 +1,4 @@
-package su.nexus.commonlib.message;
+package su.nexus.lib.message;
 
 public interface MessageTagger {
 	default Message tagMessage(Message message) {

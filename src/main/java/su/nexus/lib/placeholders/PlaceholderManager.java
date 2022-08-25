@@ -1,4 +1,4 @@
-package su.nexus.commonlib.placeholders;
+package su.nexus.lib.placeholders;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
@@ -16,8 +16,8 @@ import ru.den_abr.commonlib.placeholders.custom.LoadablePlaceholder;
 import ru.den_abr.commonlib.placeholders.custom.PlaceholdersClassLoader;
 import ru.den_abr.commonlib.utility.AutoCatch;
 import ru.den_abr.commonlib.utility.UtilityMethods;
-import su.nexus.commonlib.CommonLibPlugin;
-import su.nexus.commonlib.util.UtilityMethods;
+import su.nexus.lib.NexusLibPlugin;
+import su.nexus.lib.util.UtilityMethods;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -178,13 +178,13 @@ public class PlaceholderManager {
 			final LoadablePlaceholder loadablePlaceholder = loadPlaceholderFromFile(file);
 			if (loadablePlaceholder != null) {
 				registerClassPlaceholder(loadablePlaceholder);
-				CommonLibPlugin.getInstance().getLogger().info(loadablePlaceholder.getId() + " v" + loadablePlaceholder.getVersion() + " by " + loadablePlaceholder.getAuthor() + " loaded from " + file.getName());
+				NexusLibPlugin.getInstance().getLogger().info(loadablePlaceholder.getId() + " v" + loadablePlaceholder.getVersion() + " by " + loadablePlaceholder.getAuthor() + " loaded from " + file.getName());
 			}
 		}
 	}
 
 	public static void unloadFromClasses() {
-		getRegisteredPlaceholders(CommonLibPlugin.getInstance()).stream().filter(ClassPlaceholderInfo.class::isInstance)
+		getRegisteredPlaceholders(NexusLibPlugin.getInstance()).stream().filter(ClassPlaceholderInfo.class::isInstance)
 				.map(ClassPlaceholderInfo.class::cast).forEach(PlaceholderManager::unloadClassPlaceholder);
 	}
 
@@ -199,12 +199,12 @@ public class PlaceholderManager {
 		if (!file.exists()) {
 			return null;
 		}
-		final PlaceholdersClassLoader loader = new PlaceholdersClassLoader(CommonLibPlugin.getInstance(), file);
+		final PlaceholdersClassLoader loader = new PlaceholdersClassLoader(NexusLibPlugin.getInstance(), file);
 		return loader.lookupPlaceholder();
 	}
 
 	public static File getPlaceholdersFolder() {
-		final File placeholdersFolder = new File(CommonLibPlugin.getInstance().getDataFolder(), "placeholders");
+		final File placeholdersFolder = new File(NexusLibPlugin.getInstance().getDataFolder(), "placeholders");
 		if (!placeholdersFolder.exists()) {
 			placeholdersFolder.mkdirs();
 		}

@@ -1,4 +1,4 @@
-package su.nexus.commonlib.util;
+package su.nexus.lib.util;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.FieldNamingPolicy;

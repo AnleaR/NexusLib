@@ -7,13 +7,13 @@
  *  net.md_5.bungee.chat.ComponentSerializer
  *  org.bukkit.command.CommandSender
  */
-package su.nexus.commonlib.message;
+package su.nexus.lib.message;
 
 import com.google.gson.JsonElement;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.command.CommandSender;
-import su.nexus.commonlib.util.GsonUtil;
+import su.nexus.lib.util.GsonUtil;
 
 import java.util.Arrays;
 import java.util.List;

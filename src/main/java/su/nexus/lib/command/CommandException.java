@@ -1,8 +1,8 @@
-package su.nexus.commonlib.command;
+package su.nexus.lib.command;
 
 
-import su.nexus.commonlib.message.Message;
-import su.nexus.commonlib.message.MessageKey;
+import su.nexus.lib.message.Message;
+import su.nexus.lib.message.MessageKey;
 
 public class CommandException extends RuntimeException {
 	private final Message message;

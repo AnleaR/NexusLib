@@ -1,4 +1,4 @@
-package su.nexus.commonlib.commands;
+package su.nexus.lib.commands;
 
 public class PlaceholderCommands {
 }

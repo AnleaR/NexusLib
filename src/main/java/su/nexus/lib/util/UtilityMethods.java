@@ -1,11 +1,8 @@
-package su.nexus.commonlib.util;
+package su.nexus.lib.util;
 
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.injector.netty.WirePacket;
 import com.comphenix.protocol.utility.MinecraftVersion;
-import com.comphenix.protocol.utility.StreamSerializer;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -20,18 +17,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.mineacademy.fo.ChatUtil;
-import su.nexus.commonlib.CommonLibPlugin;
-import su.nexus.commonlib.message.MessagePosition;
+import su.nexus.lib.NexusLibPlugin;
+import su.nexus.lib.message.MessagePosition;
 
 import java.awt.*;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.List;
 import java.util.function.Function;
-import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -401,7 +393,7 @@ public class UtilityMethods {
 		}
 
 		if (repeats > 0) {
-			Bukkit.getScheduler().runTaskLaterAsynchronously(CommonLibPlugin.getInstance(), () -> {
+			Bukkit.getScheduler().runTaskLaterAsynchronously(NexusLibPlugin.getInstance(), () -> {
 				sendRawFixedMessage(p, fixedJson, pos, repeats - 1);
 			}, 20L);
 		}

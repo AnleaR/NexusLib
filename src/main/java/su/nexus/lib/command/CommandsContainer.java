@@ -1,4 +1,4 @@
-package su.nexus.commonlib.command;
+package su.nexus.lib.command;
 
 public interface CommandsContainer {
 }

@@ -1,4 +1,4 @@
-package su.nexus.commonlib.message;
+package su.nexus.lib.message;
 
 public enum MessageType {
 	STRING,

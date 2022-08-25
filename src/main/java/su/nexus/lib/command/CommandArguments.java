@@ -9,7 +9,7 @@
  *  org.bukkit.command.CommandSender
  *  org.bukkit.entity.Player
  */
-package su.nexus.commonlib.command;
+package su.nexus.lib.command;
 
 import com.google.common.collect.Iterables;
 import lombok.Getter;
@@ -17,8 +17,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import su.nexus.commonlib.message.Message;
-import su.nexus.commonlib.message.MessageKey;
+import su.nexus.lib.message.Message;
+import su.nexus.lib.message.MessageKey;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;

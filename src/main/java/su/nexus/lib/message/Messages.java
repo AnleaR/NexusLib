@@ -1,11 +1,11 @@
-package su.nexus.commonlib.message;
+package su.nexus.lib.message;
 
 import com.google.common.base.Preconditions;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.JsonObject;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
-import su.nexus.commonlib.util.GsonUtil;
+import su.nexus.lib.util.GsonUtil;
 
 import java.io.File;
 import java.util.Arrays;

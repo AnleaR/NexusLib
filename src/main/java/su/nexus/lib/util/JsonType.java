@@ -1,4 +1,4 @@
-package su.nexus.commonlib.util;
+package su.nexus.lib.util;
 
 public enum JsonType {
 	NULL,

@@ -18,7 +18,7 @@ public final class NexusLibPlugin extends SimplePlugin {
 	*/
 	@Override
 	protected void onPluginStart() {
-		// TODO
+
 	}
 
 	/**
@@ -29,6 +29,8 @@ public final class NexusLibPlugin extends SimplePlugin {
 
 		// You can check for necessary plugins and disable loading if they are missing
 		Valid.checkBoolean(HookManager.isVaultLoaded(), "You need to install Vault so that we can work with packets, offline player data, prefixes and groups.");
+		Valid.checkBoolean(HookManager.isProtocolLibLoaded(), "You need to install ProtocolLib so that we can work with packets and protocols.");
+		Valid.checkBoolean(HookManager.isPlaceholderAPILoaded(), "You need to install PlaceholderAPI so that we can work with placeholders.");
 
 		// Uncomment to load variables
 		// Variable.loadVariables();

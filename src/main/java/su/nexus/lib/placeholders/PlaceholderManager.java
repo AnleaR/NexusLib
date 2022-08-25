@@ -11,12 +11,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
-import ru.den_abr.commonlib.CommonLib;
-import ru.den_abr.commonlib.placeholders.custom.LoadablePlaceholder;
-import ru.den_abr.commonlib.placeholders.custom.PlaceholdersClassLoader;
-import ru.den_abr.commonlib.utility.AutoCatch;
-import ru.den_abr.commonlib.utility.UtilityMethods;
 import su.nexus.lib.NexusLibPlugin;
+import su.nexus.lib.placeholders.custom.LoadablePlaceholder;
+import su.nexus.lib.placeholders.custom.PlaceholdersClassLoader;
+import su.nexus.lib.util.AutoCatch;
 import su.nexus.lib.util.UtilityMethods;
 
 import java.io.File;
@@ -167,10 +165,10 @@ public class PlaceholderManager {
 		return is;
 	}
 
-	public static void unloadClassPlaceholder(final ClassPlaceholderInfo pl) {
-		pl.uninjectForeignPlaceholders();
-		PlaceholderManager.placeholders.remove(pl.getHolder(), pl);
-		AutoCatch.run(pl.getHandlingPlaceholder().getLoader()::close);
+	public static void unloadClassPlaceholder(final ClassPlaceholderInfo classPlaceholderInfo) {
+		classPlaceholderInfo.uninjectForeignPlaceholders();
+		PlaceholderManager.placeholders.remove(classPlaceholderInfo.getHolder(), classPlaceholderInfo);
+		AutoCatch.run(classPlaceholderInfo.getHandlingPlaceholder().getLoader()::close);
 	}
 
 	public static void loadFromClasses() {

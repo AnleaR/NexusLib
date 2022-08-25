@@ -1,0 +1,175 @@
+# !-----------------------------------------------------------------------------------------------!
+#                              Welcome to the localization file.
+# !-----------------------------------------------------------------------------------------------!
+#
+#   The localization/ folder stores various localization files. Use the suggested naming
+#   convention message_LANGUAGE.yml and then the "SimpleLocalization" or the "Lang" class to
+#   use this file.
+#
+#   1) COLOR CODES are supported with the '&' character.
+#      - For usage, see http://minecraftwiki.net/wiki/Formatting_codes
+#      - When you use them, place quotes around the message like this: "Hello &cworld."
+#       - To use HEX colors, use #123456 syntax: "Hello #123456world."
+#
+#   2) TO HIDE any message, set it to 'none'.
+#
+#   3) For UNICODE CHARACTERS (smileys, symbols, ..), save the file in UTF-8 encoding. See
+#      - https://github.com/${author}/${project.name}/wiki/Use-Right-Encoding
+#
+#   4) JSON is supported. Prepend the message with [JSON].
+#
+#   5) JAVASCRIPT NOTICE: Some of our messages are just-in-time compiled with JavaScript.
+#      Those typically have variables such as "self" inside of them. IF YOU CANNOT CODE
+#      in JavaScript, be extra careful and do not remove () brackets or the variables!
+#
+# !-----------------------------------------------------------------------------------------------!
+
+# -------------------------------------------------------------------------------------------------
+# Messages related to commands
+# -------------------------------------------------------------------------------------------------
+Commands:
+  No_Console: "&cКоманда только для игроков"
+  No_BungeeCord: "&cBungeeCord выключен"
+  Console_Missing_Player_Name: "&cУкажите имя игрока"
+  Cooldown_Wait: "&c[&eПодождите&c] &b&o{duration} сек. перед использованием этой команды"
+  Invalid_Argument: "Некорректный аргумент. Используйте &6/{label} ? &e&oдля помощи"
+  Invalid_Sub_Argument: "Некорректный аргумент. Используйте &6'/{label} {0}' &e&oдля помощи"
+  Invalid_Argument_Multiline: "Некорректный аргумент. Используйте"
+  Invalid_Time: "Некорректно указано время, предполагается '3 hours' или '15 minutes', вы ввели: '{input}'"
+  Invalid_Number: "Число должно быть целым или с плавающей точкой. Вы ввели: '{input}'"
+  Label_Authors: "#c060fcСделано разработчиком(-ами): #85f2f2"
+  Label_Description: "#c060fcОписание: #85f2f2"
+  Label_Optional_Args: "дополнительные аргументы"
+  Label_Required_Args: "необходимые аргументы"
+  Label_Usages: "#c060fcИспользуйте: #85f2f2"
+  Label_Usage: "#c060fcИспользуйте: #85f2f2"
+  Label_Help_For: "#c060fcПомощь по #85f2f2/{label}&r"
+  Label_Subcommand_Description: " #c060fc/{label} {sublabel} {usage+}{dash+}{description}"
+  Help_Tooltip_Description: "#c060fcОписание: #85f2f2{description}"
+  Help_Tooltip_Permission: "#c060fcПермишен: #85f2f2{permission}"
+  Help_Tooltip_Usage: "#c060fcИспользуйте: #85f2f2"
+  Reload_Description: "Перезагружает конфиг"
+  Reload_Started: "Перезагружаем данные плагина. Пожалуйста, подождите.."
+  Reload_Success: "#85f2f2{plugin_name} {plugin_version} перезагружен"
+  Reload_Fail: "Возникла ошибка при перезагрузке! В консоли дополнительная информация. Ошибка: {error}"
+  Reload_File_Load_Error: "Возникла ошибка при загрузке файлов с вашего диска! В консоли дополнительная информация. {plugin_name} не был перезагружен"
+  Debug_Description: "Заархивируйте свои настройки для сообщений об ошибках"
+  Debug_Preparing: "&6Подготавливаем логи дебага..."
+  Debug_Success: "#85f2f2Скопировано {amount} файл(-а,-ов) в debug.zip. Ваша конфиденциальная MySQL информация была убрана из YAML файлов. Пожалуйста загрузите её на ufile.io и отправьте нам"
+  Debug_Copy_Fail: "Копирование файлов остановлено на {file}. В консоли дополнительная информация"
+  Debug_Zip_Fail: "Не получилось заархивировать ваши файлы. В консоли дополнительная информация. Пожалуйста, заархивируйте дебаг/папку и отправьте это нам на ufile.io"
+  Perms_Description: "Показывает все пермишены плагина"
+  Perms_Usage:
+  Perms_Header: "Список всех пермишенов плагина"
+  Perms_Main: "Главный"
+  Perms_Permissions: "Пермишены:"
+  Perms_True_By_Default: "&7[true по стандарту]"
+  Perms_Info: "&7Инфо: &f"
+  Perms_Default: "&7Стандарт? "
+  Perms_Applied: "&7Есть ли он у вас? "
+  Perms_Yes: "&2да"
+  Perms_No: "&cнет"
+  Error: "Возникла ошибка при использовании команды. Сообщите Администрации об ошибке"
+  Header_No_Subcommands: "Эта команда не имеет аргументов"
+  Header_No_Subcommands_Permission: "У вас недостаточно прав для этих субкоманд"
+  Header_Color: "LIGHT_PURPLE"
+  Header_Secondary_Color: "WHITE"
+  Reloading: "перезагружается"
+  Disabled: "выключен"
+  Use_While_Null: "Невозможно использовать эту команду пока плагин {state}"
+  Incompatible: "Эта команда работает на версии Майнкрафт {0} и выше"
+  Toggled_Plugin_Part: "'&7Вы ' + (ignoring ? 'больше &aне игнорируете' : '&cтеперь игнорируете') + ' &7{0}'"
+  Use_Alternative_Header: false
+  Alternative_Header: "#c060fc{plugin_name}: &7Используйте '/{0} ?', чтобы увидеть все команды"
+
+# -------------------------------------------------------------------------------------------------
+# Messages related to paginator splitting command help into multiple pages
+# -------------------------------------------------------------------------------------------------
+Pages:
+  No_Page_Number: "Укажите номер страницы для этой команды"
+  No_Pages: "У этой команды нет страниц"
+  No_Page: "У этой команды нет такой страницы"
+  Invalid_Page: "'{input}' не является числом"
+  Go_To_Page: "&7Перейти на страницу {page}"
+  Go_To_First_Page: "&7Перейти на начальную страницу"
+  Tooltip:
+    - "&7Вы также можете ориентироваться с"
+    - "&7помощью скрытых '/#flp <page> command'"
+
+# -------------------------------------------------------------------------------------------------
+# Messages related to players
+# -------------------------------------------------------------------------------------------------
+Player:
+  Not_Online: "Игрока {player} &cнет на сервере"
+  Not_Played_Before: "Игрок {player} &cне найден"
+
+# -------------------------------------------------------------------------------------------------
+# Messages related to menus
+# -------------------------------------------------------------------------------------------------
+Menu:
+  Cannot_Open_During_Conversation: "&cИспользуйте 'exit', чтобы выйти из обсуждения перед открытием меню"
+  Item_Deleted: "&2Предмет {item} был удалён"
+  Error: "&cВозникла ошибка с этим меню! Сообщите Администрации"
+  Page_Previous: "&8<< &fСтраница {page}"
+  Page_Next: "Страница {page} &8>>"
+  Page_First: "&7Начальная страница"
+  Page_Last: "&7Последняя страница"
+  Title_Tools: "Меню предметов"
+  Tooltip_Info: "&fИнформация о меню"
+  Button_Return_Title: "&4Назад"
+  Button_Return_Lore:
+    - ""
+    - "&cВернуться обратно"
+
+# -------------------------------------------------------------------------------------------------
+# Messages related to tools
+# -------------------------------------------------------------------------------------------------
+Tool:
+  Error: "&cВозникла ошибка с этим предметом. Сообщите Администрации"
+
+# -------------------------------------------------------------------------------------------------
+# Words for both singular and plural form. Separate these two forms with ", "
+# -------------------------------------------------------------------------------------------------
+Cases:
+  Second: сек., сек.
+  Message: сообщение, сообщения
+  Command: команда, команды
+
+# -------------------------------------------------------------------------------------------------
+# Different prefixes you can use by calling {prefix_<type>} such as {prefix_info}
+# -------------------------------------------------------------------------------------------------
+Prefix:
+  Info: "&5[&fИнфо&5] &d&o"
+  Success: "&5[&aУспех&5] &e&o"
+  Warn: "&5[&cНеудача&5] &e&o"
+  Error: "&8[&4Ошибка&8] &c&o"
+  Question: "&8[&9&l?&8]&3&o "
+  Announce: "&8[&6&l!&8]&e&o "
+
+# -------------------------------------------------------------------------------------------------
+# Miscellaneous
+# -------------------------------------------------------------------------------------------------
+None: "*пустота*"
+Server_Prefix: "[Сервер]"
+Console_Name: "Консоль"
+
+# -------------------------------------------------------------------------------------------------
+# Database related messages
+# -------------------------------------------------------------------------------------------------
+Data_Missing: "&c{name} нет в базе данных! Пожалуйста, создайте {type} в игре! Пропускаем.."
+Data_Loading: "База данных уже загружается. Пожалуйста, подождите..."
+
+# -------------------------------------------------------------------------------------------------
+# Messages shown when player runs a command he lacks permission for
+# -------------------------------------------------------------------------------------------------
+No_Permission: "У вас недостаточно прав"
+
+# -------------------------------------------------------------------------------------------------
+# Shown when console tries to enter a server conversation
+# -------------------------------------------------------------------------------------------------
+Conversation_Requires_Player: "Только игроки могут войти в это обсуждение"
+
+# -------------------------------------------------------------------------------------------------
+# Internal versioning number
+# -------------------------------------------------------------------------------------------------
+Version: 1

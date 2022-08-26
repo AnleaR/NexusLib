@@ -1,17 +1,17 @@
 package su.nexus.lib;
 
+import com.google.common.base.Preconditions;
+import lombok.Getter;
+import lombok.Setter;
 import org.mineacademy.fo.Valid;
 import org.mineacademy.fo.model.HookManager;
 import org.mineacademy.fo.plugin.SimplePlugin;
+import su.nexus.lib.economy.UniversalEconomyService;
 
-/**
- * PluginTemplate is a simple template you can use every time you make
- * a new plugin. This will save you time because you no longer have to
- * recreate the same skeleton and features each time.
- *
- * It uses Foundation for fast and efficient development process.
- */
 public final class NexusLibPlugin extends SimplePlugin {
+
+	@Getter @Setter
+	public static UniversalEconomyService economyService;
 
 	/**
 	* Automatically perform login ONCE when the plugin starts.
@@ -26,20 +26,11 @@ public final class NexusLibPlugin extends SimplePlugin {
 	 */
 	@Override
 	protected void onReloadablesStart() {
-
-		// You can check for necessary plugins and disable loading if they are missing
 		Valid.checkBoolean(HookManager.isVaultLoaded(), "You need to install Vault so that we can work with packets, offline player data, prefixes and groups.");
+		UniversalEconomyService.start();
+
 		Valid.checkBoolean(HookManager.isProtocolLibLoaded(), "You need to install ProtocolLib so that we can work with packets and protocols.");
 		Valid.checkBoolean(HookManager.isPlaceholderAPILoaded(), "You need to install PlaceholderAPI so that we can work with placeholders.");
-
-		// Uncomment to load variables
-		// Variable.loadVariables();
-
-
-		//
-		// Add your own plugin parts to load automatically here
-		// Please see @AutoRegister for parts you do not have to register manually
-		//
 	}
 
 	/* ------------------------------------------------------------------------------- */
@@ -51,9 +42,13 @@ public final class NexusLibPlugin extends SimplePlugin {
 	 * field already created for you in SimplePlugin but casts it to your
 	 * specific plugin instance for your convenience.
 	 *
-	 * @return
+	 * @return Instance of the plugin
 	 */
 	public static NexusLibPlugin getInstance() {
 		return (NexusLibPlugin) SimplePlugin.getInstance();
+	}
+
+	public static boolean isEconomyReady() {
+		return economyService != null;
 	}
 }

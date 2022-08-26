@@ -92,7 +92,7 @@ public class ColorsUtil {
 		return ChatColor.translateAlternateColorCodes('&', message);
 	}
 
-	public static String withOutColors(String message) {
+	public static String withoutColors(String message) {
 		for (Matcher matcher = rainbowPattern.matcher(message); matcher.find(); matcher = rainbowPattern.matcher(message)) {
 			int start = matcher.start();
 			int end = matcher.end();

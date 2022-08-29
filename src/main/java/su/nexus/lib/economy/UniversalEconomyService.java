@@ -13,6 +13,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
+import org.mineacademy.fo.annotation.AutoRegister;
 import su.nexus.lib.NexusLibPlugin;
 
 import java.lang.reflect.Field;
@@ -20,6 +21,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@AutoRegister
 public class UniversalEconomyService implements Listener {
 	private EconomyWrapper wrapper;
 	private boolean ownRegistered;
@@ -40,14 +42,14 @@ public class UniversalEconomyService implements Listener {
 	}
 
 	public SimpleEconomyService getEconomy() {
-		return this.wrapper;
+		return wrapper;
 	}
 
 	public void init() {
-		this.log = NexusLibPlugin.getInstance().getLogger();
-		this.servicesManager = Bukkit.getServicesManager();
+		log = NexusLibPlugin.getInstance().getLogger();
+		servicesManager = Bukkit.getServicesManager();
 		final Economy current = Optional.ofNullable(this.servicesManager.getRegistration(Economy.class)).map(RegisteredServiceProvider::getProvider).orElse(null);
-		this.wrapper = new EconomyWrapper((current != null) ? current : new DummyService());
+		wrapper = new EconomyWrapper((current != null) ? current : new DummyService());
 		try {
 			final Field providersField = this.servicesManager.getClass().getDeclaredField("providers");
 			providersField.setAccessible(true);
@@ -57,7 +59,7 @@ public class UniversalEconomyService implements Listener {
 									(RegisteredServiceProvider<?>) new RegisteredServiceProvider(
 											Economy.class, this.wrapper, ServicePriority.Highest, NexusLibPlugin.getInstance())));
 		} catch (Exception e) {
-			this.log.log(Level.SEVERE, "Got exception extracting providers map", e);
+			log.log(Level.SEVERE, "Got exception extracting providers map", e);
 			return;
 		}
 		final PluginManager pman = Bukkit.getPluginManager();

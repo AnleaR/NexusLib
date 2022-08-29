@@ -1,6 +1,5 @@
 package su.nexus.lib.placeholders;
 
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -57,26 +56,6 @@ public class PlaceholderInfo {
 
 	public String getDescription() {
 		return null;
-	}
-
-	public void injectForeignPlaceholders() {
-		this.injectHD();
-	}
-
-	public void uninjectForeignPlaceholders() {
-		this.uninjectHD();
-	}
-
-	protected void injectHD() {
-		if (UtilityMethods.has("HolographicDisplays") && !this.playerRequired) {
-			HologramsAPI.registerPlaceholder(this.holder, this.getToken(), 5.0, () -> this.proccess(null, this.getToken()));
-		}
-	}
-
-	protected void uninjectHD() {
-		if (UtilityMethods.has("HolographicDisplays") && !this.playerRequired) {
-			HologramsAPI.unregisterPlaceholder(this.holder, this.getToken());
-		}
 	}
 
 	protected String getToken() {

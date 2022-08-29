@@ -64,6 +64,11 @@
 			<id>viaversion-repo</id>
 			<url>https://repo.viaversion.com</url>
 		</repository>
+
+		<repository>
+			<id>janmm14-public</id>
+			<url>https://repo.janmm14.de/artifactory/public/</url>
+		</repository>
 	</repositories>
 	
 	<!-- Do NOT edit. -->
@@ -111,13 +116,6 @@
 		<!-- =================================================================================================== -->
 
 		<dependency>
-			<groupId>com.gmail.filoghost.holographicdisplays</groupId>
-			<artifactId>holographicdisplays-api</artifactId>
-			<version>2.4.9</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>com.github.MilkBowl</groupId>
 			<artifactId>VaultAPI</artifactId>
 			<version>1.7</version>
@@ -132,24 +130,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.sk89q.worldedit</groupId>
-			<artifactId>fawe</artifactId>
-			<version>6.2.5-SNAPSHOT</version>
-
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/FAWE.jar</systemPath>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sk89q.worldedit</groupId>
-			<artifactId>worldedit-bukkit</artifactId>
-			<version>7.2.12</version>
-
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/WorldEdit.jar</systemPath>
-		</dependency>
-
-		<dependency>
 			<groupId>org.hjson</groupId>
 			<artifactId>hjson</artifactId>
 			<version>3.0.0</version>
@@ -157,52 +137,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>me.clip</groupId>
-			<artifactId>placeholderapi</artifactId>
-			<version>2.11.1</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>de.janmm14</groupId>
 			<artifactId>jsonmessagemaker</artifactId>
 			<version>3.2.1</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>2.2</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.burningwave/core -->
-		<dependency>
-			<groupId>org.burningwave</groupId>
-			<artifactId>core</artifactId>
-			<version>12.53.0</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.13</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.comphenix.protocol</groupId>
-			<artifactId>ProtocolLib</artifactId>
-			<version>4.7.0</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -217,13 +154,6 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>LATEST</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>31.1-jre</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

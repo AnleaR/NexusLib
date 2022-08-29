@@ -44,7 +44,6 @@ public class PlaceholderManager {
 		Preconditions.checkNotNull((Object) replacer);
 		final PlaceholderInfo info = new PlaceholderInfo(ph, plugin, replacer, !forceSync, playerRequired);
 		PlaceholderManager.placeholders.put(plugin, info);
-		info.injectForeignPlaceholders();
 	}
 
 	public static void registerCustomPlaceholder(final PlaceholderInfo placeholderInfo) {
@@ -56,7 +55,6 @@ public class PlaceholderManager {
 		Preconditions.checkNotNull((Object) placeholderInfo);
 		unregister(plugin, placeholderInfo.getId());
 		PlaceholderManager.placeholders.put(plugin, placeholderInfo);
-		placeholderInfo.injectForeignPlaceholders();
 	}
 
 	public static Collection<PlaceholderInfo> getRegisteredPlaceholders(final Plugin plugin) {
@@ -75,14 +73,12 @@ public class PlaceholderManager {
 		for (final PlaceholderInfo placeholderInfo : getRegisteredPlaceholders(plugin)) {
 			if (placeholderInfo.getId().equalsIgnoreCase(pname)) {
 				PlaceholderManager.placeholders.remove(plugin, placeholderInfo);
-				placeholderInfo.uninjectForeignPlaceholders();
 			}
 		}
 	}
 
 	public static void unregisterAll() {
 		unloadFromClasses();
-		PlaceholderManager.placeholders.values().forEach(PlaceholderInfo::uninjectForeignPlaceholders);
 		PlaceholderManager.placeholders.clear();
 	}
 
@@ -166,7 +162,6 @@ public class PlaceholderManager {
 	}
 
 	public static void unloadClassPlaceholder(final ClassPlaceholderInfo classPlaceholderInfo) {
-		classPlaceholderInfo.uninjectForeignPlaceholders();
 		PlaceholderManager.placeholders.remove(classPlaceholderInfo.getHolder(), classPlaceholderInfo);
 		AutoCatch.run(classPlaceholderInfo.getHandlingPlaceholder().getLoader()::close);
 	}

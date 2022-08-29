@@ -14,13 +14,6 @@ public final class ClassPlaceholderInfo extends PlaceholderInfo {
 		this.placeholder = placeholder;
 	}
 
-	@Override
-	protected void injectHD() {
-		if (!this.placeholder.requiresPlayer()) {
-			this.placeholder.injectHD();
-		}
-	}
-
 	public LoadablePlaceholder getHandlingPlaceholder() {
 		return this.placeholder;
 	}

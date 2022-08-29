@@ -34,7 +34,7 @@
 			 but if you use "11" or "17" then it will NOT load on servers
 			 with previous Java versions. We recommend you stick with 1.8.
 			 -->
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		
 		<!-- Change to the latest version from https://github.com/kangarko/Foundation/releases
 			 or change to "LATEST" if you downloaded Foundation to your disk and compiled it. -->

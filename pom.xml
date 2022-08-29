@@ -34,7 +34,7 @@
 			 but if you use "11" or "17" then it will NOT load on servers
 			 with previous Java versions. We recommend you stick with 1.8.
 			 -->
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		
 		<!-- Change to the latest version from https://github.com/kangarko/Foundation/releases
 			 or change to "LATEST" if you downloaded Foundation to your disk and compiled it. -->
@@ -173,13 +173,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				
-				<!-- Change version to the latest one from
-					 https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-				<version>3.10.1</version>
 				<configuration>
-					<source>16</source>
-					<target>16</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			<plugin>

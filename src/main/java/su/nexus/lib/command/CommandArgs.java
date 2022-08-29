@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class CommandArguments {
+public class CommandArgs {
 
 	@Getter
 	private final CommandSender sender;
@@ -35,15 +35,15 @@ public class CommandArguments {
 	@Getter
 	private final String[] args;
 
-	protected CommandArguments(CommandSender sender, Command command, String label, String[] args) {
+	protected CommandArgs(CommandSender sender, Command command, String label, String[] args) {
 		this.sender = sender;
 		this.command = command;
 		this.label = label;
 		this.args = args;
 	}
 
-	public static CommandArguments create(CommandSender sender, Command command, String label, String[] args) {
-		return new CommandArguments(sender, command, label, args);
+	public static CommandArgs create(CommandSender sender, Command command, String label, String[] args) {
+		return new CommandArgs(sender, command, label, args);
 	}
 
 	public String getArgs(int index) {

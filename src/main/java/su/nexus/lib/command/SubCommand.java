@@ -9,7 +9,7 @@ public class SubCommand {
 	private String name;
 	private Collection<String> aliases;
 	private boolean inGameOnly;
-	private Consumer<CommandArguments> executor;
+	private Consumer<CommandArgs> executor;
 
 	public String getName() {
 		return this.name;

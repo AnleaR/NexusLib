@@ -47,10 +47,10 @@ public class CommandManager {
 		return cmd;
 	}
 
-	private Consumer<CommandArguments> toConsumer(CommandsContainer container, MethodHandle handle) {
+	private Consumer<CommandArgs> toConsumer(CommandsContainer container, MethodHandle handle) {
 		return args -> {
 			try {
-				handle.invoke(container, (CommandArguments) args);
+				handle.invoke(container, (CommandArgs) args);
 			} catch (Throwable e) {
 				throw new RuntimeException(e.getCause());
 			}
@@ -59,7 +59,7 @@ public class CommandManager {
 
 	private Command getIfCommandMethod(Method method) {
 		int mod = method.getModifiers();
-		if (Modifier.isPublic(mod) && !Modifier.isStatic(mod) && method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(CommandArguments.class)) {
+		if (Modifier.isPublic(mod) && !Modifier.isStatic(mod) && method.getParameterTypes().length == 1 && method.getParameterTypes()[0].equals(CommandArgs.class)) {
 			return method.getAnnotation(Command.class);
 		}
 		return null;

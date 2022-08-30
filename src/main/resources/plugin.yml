@@ -11,8 +11,7 @@ main: ${main.class}
 author: ${author}
 load: STARTUP
 depend:
-  - ProtocolLib
-  - PacketWrapper
+  - Vault
 loadbefore:
   - Vault
 

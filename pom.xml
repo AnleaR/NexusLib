@@ -179,37 +179,6 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				
-				<!-- We use latest snapshot here for modern Java compatibility. Change version to the latest one from
-					 https://repository.apache.org/content/repositories/snapshots/org/apache/maven/plugins/maven-shade-plugin/ -->
-				<version>3.3.1-SNAPSHOT</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<createDependencyReducedPom>false</createDependencyReducedPom>
-					<artifactSet>
-						<includes>
-							<include>${foundation.path}:Foundation*</include>
-						</includes>
-					</artifactSet>
-					<relocations>
-						<!-- Move the Foundation library into your own package in "lib" subpackage to prevent interference. -->
-						<relocation>
-							<pattern>org.mineacademy.fo</pattern>
-							<shadedPattern>${project.groupId}.${project.artifactId}.lib</shadedPattern>
-						</relocation>
-					</relocations>
-				</configuration>
-			</plugin>
 		</plugins>
 		<resources>
 			<resource>

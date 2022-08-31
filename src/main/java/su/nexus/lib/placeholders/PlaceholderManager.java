@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
-import su.nexus.lib.NexusLibPlugin;
+import su.nexus.lib.NexusLib;
 import su.nexus.lib.placeholders.custom.LoadablePlaceholder;
 import su.nexus.lib.placeholders.custom.PlaceholdersClassLoader;
 import su.nexus.lib.util.AutoCatch;
@@ -171,13 +171,12 @@ public class PlaceholderManager {
 			final LoadablePlaceholder loadablePlaceholder = loadPlaceholderFromFile(file);
 			if (loadablePlaceholder != null) {
 				registerClassPlaceholder(loadablePlaceholder);
-				NexusLibPlugin.getInstance().getLogger().info(loadablePlaceholder.getId() + " v" + loadablePlaceholder.getVersion() + " by " + loadablePlaceholder.getAuthor() + " loaded from " + file.getName());
 			}
 		}
 	}
 
 	public static void unloadFromClasses() {
-		getRegisteredPlaceholders(NexusLibPlugin.getInstance()).stream().filter(ClassPlaceholderInfo.class::isInstance)
+		getRegisteredPlaceholders(NexusLib.getInstance()).stream().filter(ClassPlaceholderInfo.class::isInstance)
 				.map(ClassPlaceholderInfo.class::cast).forEach(PlaceholderManager::unloadClassPlaceholder);
 	}
 
@@ -192,12 +191,12 @@ public class PlaceholderManager {
 		if (!file.exists()) {
 			return null;
 		}
-		final PlaceholdersClassLoader loader = new PlaceholdersClassLoader(NexusLibPlugin.getInstance(), file);
+		final PlaceholdersClassLoader loader = new PlaceholdersClassLoader(NexusLib.getInstance(), file);
 		return loader.lookupPlaceholder();
 	}
 
 	public static File getPlaceholdersFolder() {
-		final File placeholdersFolder = new File(NexusLibPlugin.getInstance().getDataFolder(), "placeholders");
+		final File placeholdersFolder = new File(NexusLib.getInstance().getDataFolder(), "placeholders");
 		if (!placeholdersFolder.exists()) {
 			placeholdersFolder.mkdirs();
 		}

@@ -3,7 +3,8 @@ package su.nexus.lib.placeholders.custom;
 import com.google.common.base.Joiner;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
-import su.nexus.lib.NexusLibPlugin;
+import org.mineacademy.fo.plugin.SimplePlugin;
+import su.nexus.lib.NexusLib;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,12 +21,12 @@ public class PlaceholdersClassLoader extends URLClassLoader {
 		ClassLoader.registerAsParallelCapable();
 	}
 
-	private final NexusLibPlugin plugin;
+	private final SimplePlugin plugin;
 	private File placeholderFile;
 
-	public PlaceholdersClassLoader(final NexusLibPlugin plugin, final File file) {
+	public PlaceholdersClassLoader(final SimplePlugin plugin, final File file) {
 		super(new URL[0], plugin.getClass().getClassLoader());
-		this.plugin = NexusLibPlugin.getInstance();
+		this.plugin = NexusLib.getInstance();
 		try {
 			this.placeholderFile = file;
 			this.addURL(this.placeholderFile.toURI().toURL());
@@ -174,7 +175,7 @@ public class PlaceholdersClassLoader extends URLClassLoader {
 		return this.placeholderFile;
 	}
 
-	public NexusLibPlugin getPlugin() {
-		return NexusLibPlugin.getInstance();
+	public SimplePlugin getPlugin() {
+		return NexusLib.getInstance();
 	}
 }

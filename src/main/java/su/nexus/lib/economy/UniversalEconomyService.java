@@ -1,6 +1,7 @@
 package su.nexus.lib.economy;
 
 import com.google.common.base.Preconditions;
+import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
@@ -14,18 +15,19 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
 import org.mineacademy.fo.annotation.AutoRegister;
-import su.nexus.lib.NexusLibPlugin;
+import org.mineacademy.fo.plugin.SimplePlugin;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @AutoRegister
 public final class UniversalEconomyService implements Listener {
+
+	@Getter
+	public static UniversalEconomyService economyService;
 	private EconomyWrapper wrapper;
 	private boolean ownRegistered;
-	private Logger log;
+	private static SimplePlugin plugin;
 	private ServicesManager servicesManager;
 	private Map<Class<?>, List<RegisteredServiceProvider<?>>> providers;
 
@@ -33,12 +35,12 @@ public final class UniversalEconomyService implements Listener {
 		this.ownRegistered = false;
 	}
 
-	public static void start() {
-		Preconditions.checkState(NexusLibPlugin.getEconomyService() != null, "Economy already started.");
+	public static void start(final SimplePlugin simplePlugin) {
+		Preconditions.checkState(getEconomyService() != null, "Economy already started.");
 		final UniversalEconomyService service = new UniversalEconomyService();
-		NexusLibPlugin.setEconomyService(service);
+		economyService = service;
+		plugin = simplePlugin;
 		service.init();
-		NexusLibPlugin.getInstance().getLogger().info("Vault enabled. Activated universal economy service.");
 	}
 
 	public SimpleEconomyService getEconomy() {
@@ -46,7 +48,6 @@ public final class UniversalEconomyService implements Listener {
 	}
 
 	public void init() {
-		log = NexusLibPlugin.getInstance().getLogger();
 		servicesManager = Bukkit.getServicesManager();
 		final Economy current = Optional.ofNullable(this.servicesManager.getRegistration(Economy.class)).map(RegisteredServiceProvider::getProvider).orElse(null);
 		wrapper = new EconomyWrapper((current != null) ? current : new DummyService());
@@ -57,13 +58,12 @@ public final class UniversalEconomyService implements Listener {
 					.put(Economy.class,
 							new StaticList(
 									(RegisteredServiceProvider<?>) new RegisteredServiceProvider(
-											Economy.class, this.wrapper, ServicePriority.Highest, NexusLibPlugin.getInstance())));
+											Economy.class, this.wrapper, ServicePriority.Highest, plugin)));
 		} catch (Exception e) {
-			log.log(Level.SEVERE, "Got exception extracting providers map", e);
 			return;
 		}
 		final PluginManager pman = Bukkit.getPluginManager();
-		pman.registerEvents(this, NexusLibPlugin.getInstance());
+		pman.registerEvents(this, plugin);
 	}
 
 	public void disposeProvider() {
@@ -72,7 +72,7 @@ public final class UniversalEconomyService implements Listener {
 
 	@EventHandler
 	public void onDisable(final PluginDisableEvent e) {
-		if (e.getPlugin().getName().equals(NexusLibPlugin.getInstance().getName())) {
+		if (e.getPlugin().getName().equals(plugin.getName())) {
 			this.disposeProvider();
 		}
 	}
@@ -80,21 +80,17 @@ public final class UniversalEconomyService implements Listener {
 	@EventHandler
 	public void onServiceRegister(final ServiceRegisterEvent e) {
 		if (e.getProvider().getService().equals(Economy.class) && !this.ownRegistered) {
-			this.log.info("Prevented " + e.getProvider().getPlugin().getName() + " from registerig own service.");
 			this.updateDelegate((Economy) e.getProvider().getProvider());
-			this.log.info("Updated delegate. New economy: " + ((Economy) this.servicesManager.load((Class) Economy.class)).getName());
 		}
 	}
 
 	public void registerService(final SimpleEconomyService service) {
 		Preconditions.checkNotNull((Object) service);
-		NexusLibPlugin.getInstance().getLogger().info("Service " + service.getName() + " has been registered.");
 		this.ownRegistered = true;
 		this.wrapper.setDelegate(service);
 	}
 
 	public void updateDelegate(final Economy economy) {
-		NexusLibPlugin.getInstance().getLogger().info("Replacing " + this.wrapper.getDelegate().getName() + " service with " + economy.getName());
 		this.wrapper.setDelegate(economy);
 	}
 

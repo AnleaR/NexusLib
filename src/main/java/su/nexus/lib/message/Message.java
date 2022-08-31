@@ -10,7 +10,6 @@ import de.janmm14.jsonmessagemaker.api.JsonMessageConverter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import su.nexus.lib.NexusLibPlugin;
 import su.nexus.lib.placeholders.PlaceholderManager;
 import su.nexus.lib.util.GsonUtil;
 import su.nexus.lib.util.UtilityMethods;
@@ -163,9 +162,7 @@ public class Message {
 			TagProcessor obj = MessageRegistry.findTagProcessor(value);
 			try {
 				result = UtilityMethods.replaceValues(result, e -> this.replaceTags(full, obj.toElement(value), e));
-			} catch (Exception e2) {
-				NexusLibPlugin.getInstance().getLogger().log(Level.SEVERE, "Got exception processing tag " + full + " with value " + value + " for message " + this.key, e2);
-			}
+			} catch (Exception ignored) {}
 		}
 		this.cachedWithTags = UtilityMethods.replaceValues(result, e -> Message.setPrimitive(e, UtilityMethods.color(e.getAsString())));
 		return result;

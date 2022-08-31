@@ -3,7 +3,8 @@ package su.nexus.lib.placeholders.custom;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.entity.Player;
-import su.nexus.lib.NexusLibPlugin;
+import org.mineacademy.fo.plugin.SimplePlugin;
+import su.nexus.lib.NexusLib;
 
 import java.io.File;
 import java.util.Collection;
@@ -61,8 +62,8 @@ public abstract class LoadablePlaceholder {
 		this.file = file;
 	}
 
-	public final NexusLibPlugin lib() {
-		return NexusLibPlugin.getInstance();
+	public final SimplePlugin lib() {
+		return NexusLib.getInstance();
 	}
 
 	public final PlaceholdersClassLoader getLoader() {

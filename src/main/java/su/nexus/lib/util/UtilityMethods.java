@@ -3,17 +3,13 @@ package su.nexus.lib.util;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.injector.netty.WirePacket;
 import com.comphenix.protocol.reflect.accessors.Accessors;
 import com.comphenix.protocol.utility.MinecraftReflection;
 import com.comphenix.protocol.utility.MinecraftVersion;
-import com.comphenix.protocol.utility.StreamSerializer;
 import com.comphenix.protocol.wrappers.EnumWrappers;
-import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.comphenix.protocol.wrappers.nbt.NbtCompound;
 import com.comphenix.protocol.wrappers.nbt.NbtFactory;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closer;
@@ -32,9 +28,6 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.command.Command;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -49,13 +42,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.Vector;
 import org.mineacademy.fo.ChatUtil;
-import su.nexus.lib.NexusLibPlugin;
+import su.nexus.lib.NexusLib;
+import su.nexus.lib.economy.UniversalEconomyService;
 import su.nexus.lib.message.Message;
 import su.nexus.lib.message.MessagePosition;
 import su.nexus.lib.message.MessageRegistry;
-import su.nexus.lib.placeholders.PlaceholderManager;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
@@ -68,14 +63,12 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -168,7 +161,7 @@ public class UtilityMethods {
 		}
 
 		if (repeats > 0) {
-			Bukkit.getScheduler().runTaskLaterAsynchronously(NexusLibPlugin.getInstance(), () -> {
+			Bukkit.getScheduler().runTaskLaterAsynchronously(NexusLib.getInstance(), () -> {
 				sendRawFixedMessage(p, fixedJson, pos, repeats - 1);
 			}, 20L);
 		}
@@ -226,7 +219,7 @@ public class UtilityMethods {
 		ByteArrayDataOutput data = ByteStreams.newDataOutput();
 		data.writeUTF("Connect");
 		data.writeUTF(server);
-		player.sendPluginMessage(NexusLibPlugin.getInstance(), "BungeeCord", data.toByteArray());
+		player.sendPluginMessage(NexusLib.getInstance(), "BungeeCord", data.toByteArray());
 	}
 
 	public static void clearInventory(Player p) {
@@ -372,7 +365,7 @@ public class UtilityMethods {
 	}
 
 	public static double getBalance(String player) {
-		return NexusLibPlugin.isEconomyReady() ? NexusLibPlugin.getEconomyService().getEconomy().getBalance(player) : 0.0D;
+		return UniversalEconomyService.getEconomyService() != null ? UniversalEconomyService.getEconomyService().getEconomy().getBalance(player) : 0.0D;
 	}
 
 	public static boolean hasBalance(Player player, double amount) {
@@ -388,8 +381,8 @@ public class UtilityMethods {
 	}
 
 	public static void addBalance(String player, double amount) {
-		if (NexusLibPlugin.isEconomyReady()) {
-			NexusLibPlugin.getEconomyService().getEconomy().addMoney(player, amount);
+		if (UniversalEconomyService.getEconomyService() != null) {
+			UniversalEconomyService.getEconomyService().getEconomy().addMoney(player, amount);
 		}
 	}
 
@@ -398,8 +391,8 @@ public class UtilityMethods {
 	}
 
 	public static void takeBalance(String player, double amount) {
-		if (NexusLibPlugin.isEconomyReady()) {
-			NexusLibPlugin.getEconomyService().getEconomy().takeMoney(player, amount);
+		if (UniversalEconomyService.getEconomyService() != null) {
+			UniversalEconomyService.getEconomyService().getEconomy().takeMoney(player, amount);
 		}
 	}
 
@@ -408,8 +401,8 @@ public class UtilityMethods {
 	}
 
 	public static void setBalance(String player, double balance) {
-		if (NexusLibPlugin.isEconomyReady()) {
-			NexusLibPlugin.getEconomyService().getEconomy().setMoney(player, balance);
+		if (UniversalEconomyService.getEconomyService() != null) {
+			UniversalEconomyService.getEconomyService().getEconomy().setMoney(player, balance);
 		}
 	}
 
@@ -462,7 +455,7 @@ public class UtilityMethods {
 	}
 
 	public static String formatCoins(double balance) {
-		return NexusLibPlugin.getEconomyService() == null ? NexusLibPlugin.getEconomyService().getEconomy().format(balance) : String.valueOf(balance);
+		return UniversalEconomyService.getEconomyService() != null ? UniversalEconomyService.getEconomyService().getEconomy().format(balance) : String.valueOf(balance);
 	}
 
 	public static String formatMinutes(int time) {
@@ -745,7 +738,6 @@ public class UtilityMethods {
 		if (force || !target.exists()) {
 			target.getParentFile().mkdirs();
 			target.delete();
-			NexusLibPlugin.getInstance().getLogger().info("Downloading " + target.getName() + " from " + url);
 			Closer closer = Closer.create();
 
 			try {
@@ -754,7 +746,6 @@ public class UtilityMethods {
 				target.createNewFile();
 				FileOutputStream fileOS = closer.register(new FileOutputStream(target));
 				fileOS.getChannel().transferFrom(readableBC, 0L, 9223372036854775807L);
-				NexusLibPlugin.getInstance().getLogger().info("Downloaded " + target.getName());
 			} catch (IOException var16) {
 				var16.printStackTrace();
 			} finally {

@@ -36,7 +36,6 @@ public final class UniversalEconomyService implements Listener {
 	}
 
 	public static void start(final SimplePlugin simplePlugin) {
-		Preconditions.checkState(getEconomyService() != null, "Economy already started.");
 		final UniversalEconomyService service = new UniversalEconomyService();
 		economyService = service;
 		plugin = simplePlugin;

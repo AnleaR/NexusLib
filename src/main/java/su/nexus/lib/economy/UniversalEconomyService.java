@@ -22,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @AutoRegister
-public class UniversalEconomyService implements Listener {
+public final class UniversalEconomyService implements Listener {
 	private EconomyWrapper wrapper;
 	private boolean ownRegistered;
 	private Logger log;

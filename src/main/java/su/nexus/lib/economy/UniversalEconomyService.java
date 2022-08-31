@@ -33,6 +33,7 @@ public final class UniversalEconomyService implements Listener {
 
 	public UniversalEconomyService() {
 		this.ownRegistered = false;
+		providers = new HashMap<>();
 	}
 
 	public static void start(final SimplePlugin simplePlugin) {
